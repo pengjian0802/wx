@@ -1,0 +1,22 @@
+<swiper indicator-dots="true" autoplay="false" interval="5000000000">
+  <block wx:for-items="{{itemDetail.imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image"/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<swiper indicator-dots="true" autoplay="false" interval="5000000000">
+  <block wx:for-items="{{itemDetail.videoUrls}}">
+    <swiper-item>
+      <video src="{{item}}" class="myVideo"></video>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view>
+    <text style="font-Size:30rpx;display:block;margin-top:20rpx;">时间：{{itemDetail.startTime}} ~ {{itemDetail.endTime}}</text>
+    <text style="font-Size:30rpx;display:block;margin-top:20rpx;">地点：{{itemDetail.site}}</text>
+    <text style="font-Size:30rpx;display:block;margin-top:20rpx;"> 参与者：{{itemDetail.participants}}</text>
+    <text style="font-Size:30rpx;display:block;margin-top:20rpx;">备注：{{itemDetail.remarks}}</text>
+</view>

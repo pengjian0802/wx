@@ -1,0 +1,18 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/itemDetail/itemDetail"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#6fa7ce",
+    "navigationBarTitleText": "供应链日记",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh":true
+  },
+   "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 120000
+  },
+  "debug": true
+}

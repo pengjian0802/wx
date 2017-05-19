@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<view class="container">
+  <scroll-view style="height:100%">
+    <view id="1" class="item" data-id="1" bindtap="showDetail">
+      <view class="item_left">
+        <image src="http://wx-1253484772.costj.myqcloud.com/images/2.jpg" class="item_img"></image>
+      </view>
+      <view class="item_right">
+        <text class="item_title">《ONE PIECE》</text>
+        <text class="item_date">2017-03-09</text>
+        <text>
+
+            《ONE PIECE》（海贼王）简称“OP”,是日本漫画家尾田荣一郎作画的少年漫画作品。在《周刊少年Jump》1997年34号开始连载....
+        </text>
+      </view>
+    </view>
+    <view class="part_line"></view>
+
+
+
+    <block wx:for="{{dataList}}">
+      <view class="item" data-id="{{item.id}}" bindtap="showDetail">
+        <view class="item_left">
+          <image class="item_img" src="{{item.imgUrl}}"></image>
+        </view>
+
+        <view class="item_right">
+          <text class="item_title">{{item.title}}</text>
+          <text class="item_date">{{item.date}}</text>
+          <text>
+          
+            {{item.content}}
+          </text>
+        </view>
+      </view>
+      <view class="part_line"></view>
+    </block>
+  </scroll-view>
+</view>
+<loading hidden="{{isHiddenLoading}}">加载中...</loading>
+<toast duration="1500" bindchange="closeToast" hidden="{{isHiddenToast}}">加载完成</toast>
