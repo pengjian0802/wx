@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pj.wx.dao.ItemDao">
+	<resultMap  id="ItemMap" type="com.pj.wx.entity.Item">
+		<id property="id" column="id" jdbcType="INTEGER" javaType="java.lang.Long"/>
+		<result property="title" column="title" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	 	<result property="content" column="content" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	 	<result property="imgUrl" column="img_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	 	<result property="date" column="date" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	 	<result property="startTime" column="start_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	 	<result property="endTime" column="end_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	 	<result property="site" column="site" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	 	<result property="participants" column="participants" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	 	<result property="remarks" column="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	 	<result property="createTime" column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	 	<result property="createBy" column="create_by" jdbcType="SMALLINT" javaType="java.lang.Integer"/>
+	</resultMap>
+
+	<sql id="itemField">
+		item.id,
+		item.title,
+		item.content,
+		item.img_url as imgUrl,
+		item.date,
+		item.start_time as startTime,
+		item.end_time as endTime,
+		item.site as site,
+		item.participants as participants,
+		item.remarks as remarks,
+		item.create_by as createBy,
+		item.create_time as createTime
+	</sql>
+	
+	<select id="getById" resultType="com.pj.wx.entity.Item" parameterType="java.lang.Long">
+		select 
+		<include refid="itemField" /> 
+		from item 
+		where id = #{id}
+	</select>
+	
+	<select id="findAll" resultType="com.pj.wx.entity.Item">
+		select 
+		<include refid="itemField" /> 
+		from item order by date DESC
+	</select>
+	
+	<sql id="itemConditions">
+   		<where>
+			<if test="id != null">
+				and item.id = #{id}
+	        </if>
+	        <if test="title != null">
+				and item.title = #{title}
+	        </if>
+			<if test="content != null">
+				and item.content = #{content}
+	        </if>
+			<if test="imgUrl != null">
+				and item.img_url = #{imgUrl}
+	        </if>
+	        <if test="date != null">
+				and item.date = #{date}
+	        </if>
+	        <if test="startTime != null">
+				and item.start_time = #{startTime}
+	        </if>
+	        <if test="endTime != null">
+				and item.end_time = #{endTime}
+	        </if>
+	        <if test="site != null">
+				and item.site = #{site}
+	        </if>
+	        <if test="participants != null">
+				and item.participants = #{participants}
+	        </if>
+	        <if test="remarks != null">
+				and item.remarks = #{remarks}
+	        </if>
+			<if test="createBy != null">
+				and item.create_by = #{createBy}
+	        </if>
+			<if test="createTime != null">
+				and item.create_time = #{createTime}
+	        </if>
+		</where>
+	</sql>
+
+	<insert id="insert" parameterType="com.pj.wx.entity.Item">
+		insert into item
+		<trim prefix="(" suffixOverrides="," suffix=")">        
+		    	id, 
+		    <if test="title != null">
+				title,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="date != null">
+				date,
+			</if>
+			<if test="startTime != null">
+				start_time,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="site != null">
+				site,
+			</if>
+			<if test="participants != null">
+				participants,
+			</if>
+			<if test="remarks != null">
+				remarks,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffixOverrides="," suffix=")">	    
+		    	#{id},
+		    <if test="title != null">
+				#{title},
+    		</if>
+			<if test="content != null">
+				#{content},
+    		</if>
+			<if test="imgUrl != null">
+				#{imgUrl},
+    		</if>
+    		<if test="date != null">
+				#{date},
+			</if>
+			<if test="startTime != null">
+				#{startTime},
+			</if>
+			<if test="endTime != null">
+				#{endTime},
+			</if>
+			<if test="site != null">
+				#{site},
+			</if>
+			<if test="participants != null">
+				#{participants},
+			</if>
+			<if test="remarks != null">
+				#{remarks},
+			</if>
+			<if test="createBy != null">
+				#{createBy},
+    		</if>
+			<if test="createTime != null">
+				#{createTime},
+    		</if>
+		</trim>
+	</insert>
+</mapper>

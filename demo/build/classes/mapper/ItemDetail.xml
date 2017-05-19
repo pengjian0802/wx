@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pj.wx.dao.ItemDetailDao">
+	<resultMap  id="ItemDetailMap" type="com.pj.wx.entity.ItemDetail">
+		<id property="id" column="id" jdbcType="INTEGER" javaType="java.lang.Long"/>
+		<result property="itemId" column="item_id" jdbcType="INTEGER" javaType="java.lang.Long"/>
+	 	<result property="imgUrl" column="img_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	 	<result property="videoUrl" column="video_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	 	<result property="createTime" column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+	 	<result property="createBy" column="create_by" jdbcType="SMALLINT" javaType="java.lang.Integer"/>
+	</resultMap>
+
+	<sql id="ItemDetailField">
+		item_detail.id,
+		item_detail.item_id as itemId,
+		item_detail.img_url as imgUrl,
+		item_detail.video_url as videoUrl,
+		item_detail.create_by as createBy,
+		item_detail.create_time as createTime
+	</sql>
+	
+	<select id="findAll" resultType="com.pj.wx.entity.ItemDetail">
+		select 
+		<include refid="ItemDetailField" /> 
+		from item_detail
+	</select>
+	
+	<select id="findByItemId" resultType="com.pj.wx.entity.ItemDetail" parameterType="java.lang.Long">
+		select 
+		<include refid="ItemDetailField" /> 
+		from item_detail
+		where item_id = #{itemId}
+	</select>
+	
+	<sql id="ItemDetailConditions">
+   		<where>
+			<if test="id != null">
+				and item_detail.id = #{id}
+	        </if>
+	        <if test="itemId != null">
+				and item_detail.item_id = #{itemId}
+	        </if>
+			<if test="imgUrl != null">
+				and item_detail.img_url = #{imgUrl}
+	        </if>
+	        <if test="videoUrl != null">
+				and item_detail.video_url = #{videoUrl}
+	        </if>
+			<if test="createBy != null">
+				and item_detail.create_by = #{createBy}
+	        </if>
+			<if test="createTime != null">
+				and item_detail.create_time = #{createTime}
+	        </if>
+		</where>
+	</sql>
+
+	<insert id="insert" parameterType="com.pj.wx.entity.ItemDetail">
+		insert into item_detail
+		<trim prefix="(" suffixOverrides="," suffix=")">        
+		    	id, 
+		    <if test="itemId != null">
+				item_id,
+			</if>
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="videoUrl != null">
+				video_url,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffixOverrides="," suffix=")">	    
+		    	#{id},
+		    <if test="itemId != null">
+				#{itemId},
+    		</if>
+			<if test="imgUrl != null">
+				#{imgUrl},
+    		</if>
+    		<if test="videoUrl != null">
+				#{videoUrl},
+			</if>
+			<if test="createBy != null">
+				#{createBy},
+    		</if>
+			<if test="createTime != null">
+				#{createTime},
+    		</if>
+		</trim>
+	</insert>
+</mapper>
